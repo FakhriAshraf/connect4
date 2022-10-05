@@ -67,10 +67,10 @@ class Grid:
                 else:
                     adjacent = 0     
         adjacent = 0
+        #pos = min(column,Grid.columns - 1 - column,line,Grid.lines - 1- line)
         for l in range(Grid.lines):
-            pos = min(column,Grid.columns - 1 - column,line,Grid.lines - 1- line)
-            if (line - pos + l) < (Grid.lines) and (column + pos - l) < Grid.columns:    
-                cell = self.grid[line - pos + l][column + pos - l]
+            if (line - l) >= 0 and (column + l) < (Grid.columns):    
+                cell = self.grid[line - l][column + l]
                 if cell == color:
                     adjacent += 1
                     if adjacent == 4:
