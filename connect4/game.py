@@ -45,9 +45,10 @@ class Grid:
                 adjacent = 0
 
         # TODO: Vertical
-        adjacent = 0
+        adjacent = 0 # Reinitialiser la variable adjacent
         for ligne in range(Grid.lines):
-            cell = self.grid[ligne][column]
+            # boucler sur verticallement sur les cellules dans la meme colonne
+            cell = self.grid[ligne][column] 
             if cell == color:
                 adjacent += 1
                 if adjacent == 4:
@@ -57,8 +58,20 @@ class Grid:
 
         # TODO: Diagonal
         adjacent = 0
+        #Verfication de la 1ere diagonnale 
+        # GRID = """
+        #|.......|
+        #|...X...|
+        #|..X....|
+        #|.X.....|
+        #|X......|
+        # 0123456
         for l in range(Grid.lines):
-            if (line - min(line,column) + l) < (Grid.lines) and (column - min(line,column) + l) < Grid.columns:    
+            # Condition pour ne pas depasser les bordures de la Grid
+            if (line - min(line,column) + l) < (Grid.lines) and (column - min(line,column) + l) < Grid.columns:   
+                # Sur la diagonnale associee a la cellule actuelle, 
+                # ou on commence par la premiere cell et 
+                # on remonte en incrementant a la fois la ligne et la colonne  
                 cell = self.grid[line - min(line,column) + l][column - min(line,column) + l]
                 if cell == color:
                     adjacent += 1
@@ -67,8 +80,18 @@ class Grid:
                 else:
                     adjacent = 0     
         adjacent = 0
-        #pos = min(column,Grid.columns - 1 - column,line,Grid.lines - 1- line)
+        #Verfication de la 2eme diagonnale 
+        #|.......|
+        #|O......|
+        #|.O.....|
+        #|..O....|
+        #|...O...|
+        # 0123456
         for l in range(Grid.lines):
+                # Sur la diagonnale associee a la cellule actuelle, 
+                # ou on commence par cette cell et 
+                # on descend en incrementant la colonne et decrementant la ligne 
+                # A vec une condition pour ne pas depasser les bordures de la Grid
             if (line - l) >= 0 and (column + l) < (Grid.columns):    
                 cell = self.grid[line - l][column + l]
                 if cell == color:
@@ -81,6 +104,9 @@ class Grid:
 
     def tie(self) -> bool:
         # TODO
+        # Cherchant sur chaque ligne une cellule vide,
+        # si on trouve une en retourne False sinon on boucle 
+        # on retourne True si la Grid est pleine
         for line in range(Grid.lines):
             if Cell.EMPTY in self.grid[line]:
                 return False
