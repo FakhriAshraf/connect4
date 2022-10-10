@@ -6,7 +6,7 @@ from connect4.serde import deserialize_grid, serialize_grid
 
 
 class TestSerde(unittest.TestCase):
-    @unittest.skip
+    #@unittest.skip
     def test_grid_serde(self):
         grid = Grid()
         for line in range(grid.lines):
